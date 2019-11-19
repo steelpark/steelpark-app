@@ -27,3 +27,5 @@ jobs:
         cmd: test:ci
     - name: Code Climate Coverage Action
       uses: paambaati/codeclimate-action@v2.3.0
+      with: 
+        coverageCommand: yarn test:ci
