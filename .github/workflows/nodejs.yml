@@ -25,3 +25,5 @@ jobs:
       uses: paambaati/codeclimate-action@v2.3.0
       with: 
         coverageCommand: yarn test:ci
+      env:
+        CC_TEST_REPORTER_ID: c292a9a740725089c0159bc85942a41c447d68879512c419f544ed730f90a279
