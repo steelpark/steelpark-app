@@ -24,6 +24,6 @@ jobs:
     - name: Yarn test
       uses: Borales/actions-yarn@v2.1.0
       with:
-        cmd: test
+        cmd: test:ci
     - name: Code Climate Coverage Action
       uses: paambaati/codeclimate-action@v2.3.0
