@@ -8,11 +8,15 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Button
 } from 'react-native';
 
 import { MonoText } from '../components/StyledText';
+import {  NavigationStackScreenProps } from 'react-navigation-stack';
+//import {createAppContainer, NavigationEvents} from 'react-navigation';
 
-export default function HomeScreen() {
+
+export default function HomeScreen(props: NavigationStackScreenProps) {
   return (
     <View style={styles.container}>
       <ScrollView
@@ -22,7 +26,7 @@ export default function HomeScreen() {
           <Image
             source={
               __DEV__
-                ? require('../assets/images/robot-dev.png')
+                ? require('../assets/images/steelpark-logo.png')
                 : require('../assets/images/robot-prod.png')
             }
             style={styles.welcomeImage}
@@ -49,11 +53,16 @@ export default function HomeScreen() {
             <Text style={styles.helpLinkText}>
               Help, it didn’t automatically reload!
             </Text>
+            
           </TouchableOpacity>
         </View>
       </ScrollView>
 
       <View style={styles.tabBarInfoContainer}>
+        <Button 
+              title = "Skuska"
+              onPress={() => props.navigation.navigate('Skuska')}
+            />
         <Text style={styles.tabBarInfoText}>
           This is a tab bar. You can edit it in:
         </Text>
@@ -129,8 +138,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   welcomeImage: {
-    width: 100,
-    height: 80,
+    width: 300,
+    height: 150,
     resizeMode: 'contain',
     marginTop: 3,
     marginLeft: -10,
