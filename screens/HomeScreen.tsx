@@ -63,7 +63,7 @@ export default function HomeScreen(props: NavigationStackScreenProps) {
       <View style={styles.tabBarInfoContainer}>
         <Button 
               title = "Skuska"
-              onPress={() => props.navigation.navigate('Skuska')}
+              onPress={() => props.navigation.navigate('Links')}
             />
         <Text style={styles.tabBarInfoText}>
           This is a tab bar. You can edit it in:
