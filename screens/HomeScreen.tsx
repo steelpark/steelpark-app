@@ -58,6 +58,8 @@ export default function HomeScreen(props: NavigationStackScreenProps) {
         </View>
       </ScrollView>
 
+      
+
       <View style={styles.tabBarInfoContainer}>
         <Button 
               title = "Skuska"
