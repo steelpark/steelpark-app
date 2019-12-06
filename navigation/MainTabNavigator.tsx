@@ -6,6 +6,7 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import SkuskaScreen from '../screens/SkuskaScreen';
 
 const config = Platform.select({
   default: {},
@@ -25,8 +26,8 @@ HomeStack.navigationOptions = {
       focused={focused}
       name={
         Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
+          ? `ios-home${focused ? '' : '-outline'}`
+          : 'md-home'
       }
     />
   ),
@@ -64,12 +65,27 @@ SettingsStack.navigationOptions = {
   ),
 };
 
-SettingsStack.path = '';
+const SkuskaStack = createStackNavigator(
+  {
+    Skuska: SkuskaScreen,
+  },
+  config
+);
+
+SkuskaStack.navigationOptions = {
+  tabBarLabel: 'Skuska',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-card' : 'md-card'} />
+  ),
+};
+
+SkuskaStack.path = '';
 
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
   LinksStack,
   SettingsStack,
+  SkuskaStack,
 });
 
 export default tabNavigator;
