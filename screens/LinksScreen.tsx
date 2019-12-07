@@ -1,11 +1,17 @@
 import React, { Component } from "react";
-import { ScrollView, StyleSheet, Text, View, Button } from "react-native";
-//import { ExpoLinksView } from '@expo/samples';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  TouchableOpacity
+} from "react-native";
 
 import { db } from "../config";
 import { NavigationStackScreenProps } from "react-navigation-stack";
 
-let itemsRef = db.ref("/prizemie/");
+let itemsRef = db.ref("/Exponaty/");
 
 interface Exponat {
   id: string;
@@ -38,18 +44,15 @@ export default class LinksScreen extends Component<NavigationStackScreenProps> {
       console.log(items);
     });
   }
-
   render() {
     return (
       <ScrollView style={styles.container}>
         {this.state.items.map((i: Exponat) => (
           <View key={i.id}>
-            <Text>{i.nazov}</Text>
-            <Text>{i.id}</Text>
             <Button
-              title="Skuska"
+              title={i.oblast}
               onPress={() =>
-                this.props.navigation.navigate("Skuska", { id: i.id })
+                this.props.navigation.navigate("ExponatList", { id: i.oblast })
               }
             />
           </View>
