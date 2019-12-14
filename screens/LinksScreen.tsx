@@ -52,7 +52,9 @@ export default class LinksScreen extends Component<NavigationStackScreenProps> {
             <Button
               title={i.oblast}
               onPress={() =>
-                this.props.navigation.navigate("ExponatList", { id: i.oblast })
+                this.props.navigation.navigate("ExponatList", {
+                  oblast: i.oblast
+                })
               }
             />
           </View>

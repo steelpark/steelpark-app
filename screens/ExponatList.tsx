@@ -37,26 +37,29 @@ export default class ExponatDetail extends Component<
   };
 
   componentDidMount() {
-    /*let itemsRef = db.ref(
-      "/Exponaty/" + this.props.navigation.getParam("oblast")
-    );
-    console.log(itemsRef);*/
-
     itemsRef.on("value", snapshot => {
       let data: Exponaty = snapshot.val();
       let items = [];
       for (const k in data) {
-        items.push(data[k]);
+        if (
+          data[k]["oblast"].toLowerCase() ==
+          this.props.navigation.getParam("oblast")
+        ) {
+          items.push({ ...data[k], id: k });
+        }
+        //items.push({ ...data[k], id: k });
+        console.log(data[k]["oblast"]);
+        console.log(this.props.navigation.getParam("oblast"));
       }
       this.setState({ items });
-      console.log(items);
     });
+    console.log(itemsRef);
   }
   render() {
     return (
       <ScrollView style={styles.container}>
         {this.state.items.map((i: Exponat) => (
-          <View key={i.oblast}>
+          <View key={i.id}>
             <Button title={i.nazov} onPress={() => "ExponatDetail"} />
           </View>
         ))}
