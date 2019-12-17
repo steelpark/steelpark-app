@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import {
+  AppRegistry,
   ScrollView,
   StyleSheet,
   Text,
@@ -10,25 +11,13 @@ import {
 
 import { db } from "../config";
 import { NavigationStackScreenProps } from "react-navigation-stack";
+import { Aller_Std_It, Aller_Std_BdIt } from "../components/StyledText";
+import { Exponat } from "../interface";
 
+type Exponaty = { [key: string]: Exponat };
 let itemsRef = db.ref("/Exponaty/");
 
-interface Exponat {
-  id: string;
-  nazov: string;
-  popis: string;
-  oblast: string;
-  poschodie: string;
-  ovladanie: string;
-  obrazok: string;
-}
-type Exponaty = { [key: string]: Exponat };
-
 export default class LinksScreen extends Component<NavigationStackScreenProps> {
-  static navigationOptions = {
-    title: "Links"
-  };
-
   state = {
     items: []
   };
@@ -41,22 +30,25 @@ export default class LinksScreen extends Component<NavigationStackScreenProps> {
         items.push({ ...data[k], id: k });
       }
       this.setState({ items });
-      console.log(items);
+      //console.log(items);
     });
   }
+
   render() {
     return (
       <ScrollView style={styles.container}>
         {this.state.items.map((i: Exponat) => (
           <View key={i.id}>
-            <Button
-              title={i.oblast}
+            <TouchableOpacity
+              style={styles.button}
               onPress={() =>
                 this.props.navigation.navigate("ExponatList", {
                   oblast: i.oblast
                 })
               }
-            />
+            >
+              <Aller_Std_BdIt style={styles.text}>{i.oblast}</Aller_Std_BdIt>
+            </TouchableOpacity>
           </View>
         ))}
       </ScrollView>
@@ -67,7 +59,22 @@ export default class LinksScreen extends Component<NavigationStackScreenProps> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 15,
+    paddingTop: 20,
     backgroundColor: "#fff"
+  },
+  text: {
+    fontSize: 20,
+    letterSpacing: 2,
+    textAlign: "center",
+    color: "#333333"
+  },
+  button: {
+    marginBottom: 15,
+    marginHorizontal: 20,
+    backgroundColor: "#FF9800",
+    borderRadius: 5,
+    height: 60,
+    alignItems: "center",
+    justifyContent: "center"
   }
 });

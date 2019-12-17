@@ -1,4 +1,4 @@
-interface Exponat {
+export interface Exponat {
   id: string;
   nazov: string;
   popis: string;

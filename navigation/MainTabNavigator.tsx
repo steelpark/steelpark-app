@@ -4,9 +4,10 @@ import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import TabBarIcon from "../components/TabBarIcon";
 import HomeScreen from "../screens/HomeScreen";
-import LinksScreen from "../screens/LinksScreen";
-import SettingsScreen from "../screens/SettingsScreen";
-import ExponatList from "../screens/ExponatList";
+import OblastiScreen from "../screens/OblastiScreen";
+import ZoznamExponatovNavBarScreen from "../screens/ZoznamExpoNavBarScreen";
+import ExponatListScreen from "../screens/ExponatListScreen";
+import ExponatDetailScreen from "../screens/ExponatDetailScreen";
 
 const config = Platform.select({
   default: {}
@@ -20,7 +21,8 @@ const HomeStack = createStackNavigator(
 );
 
 HomeStack.navigationOptions = {
-  tabBarLabel: "Home",
+  tabBarLabel: "Domov",
+
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -35,15 +37,17 @@ HomeStack.navigationOptions = {
 
 HomeStack.path = "";
 
-const LinksStack = createStackNavigator(
+const OblastiStack = createStackNavigator(
   {
-    Links: LinksScreen
+    Oblasti: OblastiScreen,
+    ExponatList: ExponatListScreen,
+    ExponatDetail: ExponatDetailScreen
   },
   config
 );
 
-LinksStack.navigationOptions = {
-  tabBarLabel: "Links",
+OblastiStack.navigationOptions = {
+  tabBarLabel: "Oblasti",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -52,34 +56,18 @@ LinksStack.navigationOptions = {
   )
 };
 
-LinksStack.path = "";
+OblastiStack.path = "";
 
-const SettingsStack = createStackNavigator(
+const ZoznamExpoNavBarStack = createStackNavigator(
   {
-    Settings: SettingsScreen
+    ZoznamExponatovNavBar: ZoznamExponatovNavBarScreen,
+    ExponatDetail: ExponatDetailScreen
   },
   config
 );
 
-SettingsStack.navigationOptions = {
-  tabBarLabel: "Settings",
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === "ios" ? "ios-options" : "md-options"}
-    />
-  )
-};
-
-const ExponatListStack = createStackNavigator(
-  {
-    ExponatList: ExponatList
-  },
-  config
-);
-
-ExponatListStack.navigationOptions = {
-  tabBarLabel: "Zoznam",
+ZoznamExpoNavBarStack.navigationOptions = {
+  tabBarLabel: "Zoznam exponatov",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -88,13 +76,12 @@ ExponatListStack.navigationOptions = {
   )
 };
 
-ExponatListStack.path = "";
+ZoznamExpoNavBarStack.path = "";
 
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
-  LinksStack,
-  SettingsStack,
-  ExponatListStack
+  OblastiStack,
+  ZoznamExpoNavBarStack
 });
 
 export default tabNavigator;

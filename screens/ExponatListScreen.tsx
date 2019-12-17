@@ -11,19 +11,11 @@ import {
 import { NavigationStackScreenProps } from "react-navigation-stack";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { db } from "../config";
+import { Aller_Std_BdIt } from "../components/StyledText";
+import { Exponat } from "../interface";
 
-let itemsRef = db.ref("/Exponaty");
-
-interface Exponat {
-  id: string;
-  nazov: string;
-  popis: string;
-  oblast: string;
-  poschodie: string;
-  ovladanie: string;
-  obrazok: string;
-}
 type Exponaty = { [key: string]: Exponat };
+let itemsRef = db.ref("/Exponaty");
 
 export default class ExponatDetail extends Component<
   NavigationStackScreenProps
@@ -47,26 +39,30 @@ export default class ExponatDetail extends Component<
         ) {
           items.push({ ...data[k], id: k });
         }
-        //items.push({ ...data[k], id: k });
-        console.log(data[k]["oblast"]);
-        console.log(this.props.navigation.getParam("oblast"));
+        //console.log(data[k]["oblast"]);
+        //console.log(this.props.navigation.getParam("oblast"));
       }
       this.setState({ items });
     });
-    console.log(itemsRef);
+    //console.log(itemsRef);
   }
   render() {
     return (
       <ScrollView style={styles.container}>
         {this.state.items.map((i: Exponat) => (
           <View key={i.id}>
-            <Button title={i.nazov} onPress={() => "ExponatDetail"} />
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() =>
+                this.props.navigation.navigate("ExponatDetail", {
+                  nazov: i.nazov
+                })
+              }
+            >
+              <Aller_Std_BdIt style={styles.text}>{i.nazov}</Aller_Std_BdIt>
+            </TouchableOpacity>
           </View>
         ))}
-        <Button
-          title="Home"
-          onPress={() => this.props.navigation.navigate("Home")}
-        />
       </ScrollView>
     );
   }
@@ -84,17 +80,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 20,
-    backgroundColor: "#F26602"
+    backgroundColor: "#fff"
   },
-  vysokaPec: {
-    alignItems: "center",
-    marginTop: 25,
-    marginBottom: 40
-  },
-  vysokaPecText: {
+  text: {
     fontSize: 20,
-    color: "rgba(0,0,0, 100)",
-    lineHeight: 24,
-    textAlign: "center"
+    letterSpacing: 2,
+    textAlign: "center",
+    color: "#333333"
+  },
+  button: {
+    marginBottom: 15,
+    marginHorizontal: 20,
+    backgroundColor: "#FF9800",
+    borderRadius: 5,
+    height: 60,
+    alignItems: "center",
+    justifyContent: "center"
   }
 });
