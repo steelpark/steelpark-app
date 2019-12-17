@@ -28,9 +28,9 @@ export default class LinksScreen extends Component<NavigationStackScreenProps> {
       let items = [];
       for (const k in data) {
         items.push({ ...data[k], id: k });
+        console.log(data[k]["oblast"]);
       }
       this.setState({ items });
-      //console.log(items);
     });
   }
 
