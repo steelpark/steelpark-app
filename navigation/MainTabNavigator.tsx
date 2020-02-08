@@ -39,9 +39,39 @@ HomeStack.path = "";
 
 const OblastiStack = createStackNavigator(
   {
-    Oblasti: OblastiScreen,
-    ExponatList: ExponatListScreen,
-    ExponatDetail: ExponatDetailScreen
+    Oblasti: {
+      screen: OblastiScreen,
+      navigationOptions: {
+        headerStyle: {
+          backgroundColor: "#FFFFFF"
+        },
+        headerTitleContainerStyle: {
+          backgroundColor: "#FFF"
+        },
+        headerTintColor: "#17884F",
+        title: "Oblasti"
+      }
+    },
+    ExponatList: {
+      screen: ExponatListScreen,
+      navigationOptions: {
+        headerStyle: {
+          backgroundColor: "#FFFFFF"
+        },
+        headerTitleContainerStyle: {
+          backgroundColor: "#FFF"
+        },
+        headerTintColor: "#17884F",
+        title: "Zoznam exponatov"
+      }
+    },
+    ExponatDetail: {
+      screen: ExponatDetailScreen,
+      navigationOptions: ({ navigation }) => ({
+        title: `${navigation.getParam("nazov")}`,
+        headerTintColor: "#17884F"
+      })
+    }
   },
   config
 );
@@ -60,8 +90,26 @@ OblastiStack.path = "";
 
 const ZoznamExpoNavBarStack = createStackNavigator(
   {
-    ZoznamExponatovNavBar: ZoznamExponatovNavBarScreen,
-    ExponatDetail: ExponatDetailScreen
+    ZoznamExponatovNavBar: {
+      screen: ZoznamExponatovNavBarScreen,
+      navigationOptions: {
+        headerStyle: {
+          backgroundColor: "#FFFFFF"
+        },
+        headerTitleContainerStyle: {
+          backgroundColor: "#FFF"
+        },
+        headerTintColor: "#17884F",
+        title: "Zoznam exponatov"
+      }
+    },
+    ExponatDetail: {
+      screen: ExponatDetailScreen,
+      navigationOptions: ({ navigation }) => ({
+        title: `${navigation.getParam("nazov")}`,
+        headerTintColor: "#17884F"
+      })
+    }
   },
   config
 );

@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import {
-  AppRegistry,
   ScrollView,
   StyleSheet,
   Text,
   View,
   Button,
+  Image,
   TouchableOpacity
 } from "react-native";
 
-import { db } from "../config";
+import { db, storage } from "../config";
 import { NavigationStackScreenProps } from "react-navigation-stack";
 import { Aller_Std_It, Aller_Std_BdIt } from "../components/StyledText";
 import { Exponat } from "../interface";
@@ -47,6 +47,7 @@ export default class LinksScreen extends Component<NavigationStackScreenProps> {
                 })
               }
             >
+              <Image source={require} />
               <Aller_Std_BdIt style={styles.text}>{i.oblast}</Aller_Std_BdIt>
             </TouchableOpacity>
           </View>

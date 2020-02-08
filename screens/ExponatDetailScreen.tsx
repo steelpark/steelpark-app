@@ -1,48 +1,60 @@
 import React, { Component } from "react";
 import { Image, ScrollView, StyleSheet, View, Text } from "react-native";
-
+//import Markdown from "react-native-markdown-package";
+import HTMLView from "react-native-htmlview";
 import { NavigationStackScreenProps } from "react-navigation-stack";
-import { db } from "../config";
+import { db, storage } from "../config";
 import { Aller_Std_It, Aller_Std_BdIt } from "../components/StyledText";
 import { Exponat } from "../interface";
 
 type Exponaty = { [key: string]: Exponat };
-let itemsRef = db.ref("/Exponaty");
 
 export default class ExponatDetail extends Component<
-  NavigationStackScreenProps
+  NavigationStackScreenProps,
+  { item?: Exponat; imageUrl?: string }
 > {
-  static navigationOptions: {
-    title: string;
-  };
-
-  state = {
-    items: []
-  };
-
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
   componentDidMount() {
+    let itemsRef = db.ref(`/Exponaty/${this.props.navigation.getParam("id")}`);
     itemsRef.on("value", snapshot => {
-      let data: Exponaty = snapshot.val();
-      let items = [];
-      for (const k in data) {
-        if (data[k]["nazov"] == this.props.navigation.getParam("nazov")) {
-          items.push({ ...data[k], id: k });
-        }
-      }
-      this.setState({ items });
+      let data: Exponat = snapshot.val();
+      console.log(data);
+      console.log("ID", this.props.navigation.getParam("id"));
+      console.log("obrazok", data.obrazok);
+      const imgRef = storage.refFromURL(data.obrazok);
+      imgRef
+        .getDownloadURL()
+        .then(url => {
+          console.log(url);
+          this.setState({ item: data, imageUrl: url });
+        })
+        .catch(e => {
+          this.setState({ item: data });
+        });
     });
   }
 
   render() {
     return (
       <ScrollView style={styles.container}>
-        {this.state.items.map((i: Exponat) => (
-          <View key={i.id}>
-            <Aller_Std_BdIt style={styles.nadpis}>{i.nazov}</Aller_Std_BdIt>
-            <Aller_Std_It style={styles.popis}>{i.popis}</Aller_Std_It>
-            <Aller_Std_It style={styles.ovladanie}>{i.ovladanie}</Aller_Std_It>
+        {this.state.item && (
+          <View key={this.state.item.id}>
+            {this.state.imageUrl && (
+              <Image
+                source={{ uri: this.state.imageUrl }}
+                style={{ width: 400, height: 250, resizeMode: "stretch" }}
+              />
+            )}
+            <HTMLView value={this.state.item.popis} stylesheet={styles.popis} />
+            <HTMLView
+              value={this.state.item.ovladanie}
+              stylesheet={styles.ovladanie}
+            />
           </View>
-        ))}
+        )}
       </ScrollView>
     );
   }
@@ -51,27 +63,20 @@ export default class ExponatDetail extends Component<
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 15,
+    paddingTop: 0,
     backgroundColor: "#fff"
   },
-  nadpis: {
-    fontSize: 25,
-    letterSpacing: 3,
-    textAlign: "center",
-    color: "#333333",
-    //backgroundColor: "blue",
-    paddingBottom: 10
-  },
   popis: {
-    fontSize: 18,
+    fontSize: 50,
     letterSpacing: 2,
-    textAlign: "center",
+    textAlign: "justify",
     color: "#333333",
     //backgroundColor: "red",
-    paddingBottom: 15
+    paddingBottom: 15,
+    fontFamily: "aller-std-it"
   },
   ovladanie: {
-    fontSize: 16,
+    fontSize: 25,
     letterSpacing: 2,
     textAlign: "center",
     color: "#333333",

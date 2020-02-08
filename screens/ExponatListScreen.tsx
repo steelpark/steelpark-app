@@ -20,10 +20,6 @@ let itemsRef = db.ref("/Exponaty");
 export default class ExponatDetail extends Component<
   NavigationStackScreenProps
 > {
-  static navigationOptions: {
-    title: string;
-  };
-
   state = {
     items: []
   };
@@ -39,7 +35,7 @@ export default class ExponatDetail extends Component<
         ) {
           items.push({ ...data[k], id: k });
         }
-        //console.log(data[k]["oblast"]);
+        console.log(items);
         //console.log(this.props.navigation.getParam("oblast"));
       }
       this.setState({ items });
@@ -55,7 +51,8 @@ export default class ExponatDetail extends Component<
               style={styles.button}
               onPress={() =>
                 this.props.navigation.navigate("ExponatDetail", {
-                  nazov: i.nazov
+                  nazov: i.nazov,
+                  id: i.id
                 })
               }
             >

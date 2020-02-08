@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
-
 import { NavigationStackScreenProps } from "react-navigation-stack";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { db } from "../config";
@@ -42,7 +41,8 @@ export default class ExponatDetail extends Component<
               style={styles.button}
               onPress={() =>
                 this.props.navigation.navigate("ExponatDetail", {
-                  nazov: i.nazov
+                  nazov: i.nazov,
+                  id: i.id
                 })
               }
             >
