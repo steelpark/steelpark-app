@@ -8,6 +8,7 @@ import OblastiScreen from "../screens/OblastiScreen";
 import ZoznamExponatovNavBarScreen from "../screens/ZoznamExpoNavBarScreen";
 import ExponatListScreen from "../screens/ExponatListScreen";
 import ExponatDetailScreen from "../screens/ExponatDetailScreen";
+import NavigationScreen from "../screens/NavigationScreen";
 
 const config = Platform.select({
   default: {}
@@ -35,7 +36,33 @@ HomeStack.navigationOptions = {
   )
 };
 
-HomeStack.path = "";
+const NavigationStack = createStackNavigator(
+  {
+    Navigation: {
+      screen: NavigationScreen,
+      navigationOptions: {
+        headerTintColor: "#BC6606",
+        title: "Navigacia"
+      }
+    }
+  },
+  config
+);
+
+NavigationStack.navigationOptions = {
+  tabBarLabel: "Navigacia",
+
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={
+        Platform.OS === "ios" ? `ios-map${focused ? "" : "-outline"}` : "md-map"
+      }
+    />
+  )
+};
+
+NavigationStack.path = "";
 
 const OblastiStack = createStackNavigator(
   {
@@ -48,7 +75,7 @@ const OblastiStack = createStackNavigator(
         headerTitleContainerStyle: {
           backgroundColor: "#FFF"
         },
-        headerTintColor: "#17884F",
+        headerTintColor: "#BC6606",
         title: "Oblasti"
       }
     },
@@ -61,7 +88,7 @@ const OblastiStack = createStackNavigator(
         headerTitleContainerStyle: {
           backgroundColor: "#FFF"
         },
-        headerTintColor: "#17884F",
+        headerTintColor: "#BC6606",
         title: "Zoznam exponatov"
       }
     },
@@ -69,7 +96,7 @@ const OblastiStack = createStackNavigator(
       screen: ExponatDetailScreen,
       navigationOptions: ({ navigation }) => ({
         title: `${navigation.getParam("nazov")}`,
-        headerTintColor: "#17884F"
+        headerTintColor: "#BC6606"
       })
     }
   },
@@ -99,7 +126,7 @@ const ZoznamExpoNavBarStack = createStackNavigator(
         headerTitleContainerStyle: {
           backgroundColor: "#FFF"
         },
-        headerTintColor: "#17884F",
+        headerTintColor: "#BC6606",
         title: "Zoznam exponatov"
       }
     },
@@ -107,7 +134,7 @@ const ZoznamExpoNavBarStack = createStackNavigator(
       screen: ExponatDetailScreen,
       navigationOptions: ({ navigation }) => ({
         title: `${navigation.getParam("nazov")}`,
-        headerTintColor: "#17884F"
+        headerTintColor: "#BC6606"
       })
     }
   },
@@ -128,6 +155,7 @@ ZoznamExpoNavBarStack.path = "";
 
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
+  NavigationStack,
   OblastiStack,
   ZoznamExpoNavBarStack
 });

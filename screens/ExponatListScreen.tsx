@@ -65,14 +65,6 @@ export default class ExponatDetail extends Component<
   }
 }
 
-/*ExponatDetail.navigationOptions = {
-  title: "Nazov exponatu"
-};*/
-
-/*<Text style={styles.vysokaPecText}>
-              {this.props.navigation.getParam("popis")}
-            </Text>*/
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

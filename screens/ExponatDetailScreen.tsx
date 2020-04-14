@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Image, ScrollView, StyleSheet, View, Text } from "react-native";
-//import Markdown from "react-native-markdown-package";
 import HTMLView from "react-native-htmlview";
 import { NavigationStackScreenProps } from "react-navigation-stack";
 import { db, storage } from "../config";
@@ -21,9 +20,9 @@ export default class ExponatDetail extends Component<
     let itemsRef = db.ref(`/Exponaty/${this.props.navigation.getParam("id")}`);
     itemsRef.on("value", snapshot => {
       let data: Exponat = snapshot.val();
-      console.log(data);
-      console.log("ID", this.props.navigation.getParam("id"));
-      console.log("obrazok", data.obrazok);
+      //console.log(data);
+      //console.log("ID", this.props.navigation.getParam("id"));
+      //console.log("obrazok", data.obrazok);
       const imgRef = storage.refFromURL(data.obrazok);
       imgRef
         .getDownloadURL()
@@ -45,14 +44,10 @@ export default class ExponatDetail extends Component<
             {this.state.imageUrl && (
               <Image
                 source={{ uri: this.state.imageUrl }}
-                style={{ width: 400, height: 250, resizeMode: "stretch" }}
+                style={styles.image}
               />
             )}
-            <HTMLView value={this.state.item.popis} stylesheet={styles.popis} />
-            <HTMLView
-              value={this.state.item.ovladanie}
-              stylesheet={styles.ovladanie}
-            />
+            <HTMLView value={this.state.item.popis} stylesheet={styles} />
           </View>
         )}
       </ScrollView>
@@ -62,34 +57,32 @@ export default class ExponatDetail extends Component<
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 2,
     paddingTop: 0,
     backgroundColor: "#fff"
   },
-  popis: {
-    fontSize: 50,
-    letterSpacing: 2,
+  p: {
+    fontSize: 20,
+    letterSpacing: 1,
     textAlign: "justify",
     color: "#333333",
-    //backgroundColor: "red",
-    paddingBottom: 15,
+    marginRight: 15,
+    marginLeft: 15,
     fontFamily: "aller-std-it"
   },
-  ovladanie: {
-    fontSize: 25,
-    letterSpacing: 2,
-    textAlign: "center",
+  p1: {
+    fontSize: 20,
+    letterSpacing: 1,
+    textAlign: "justify",
     color: "#333333",
-    //backgroundColor: "green",
-    paddingBottom: 10
+    marginRight: 15,
+    marginLeft: 15,
+    fontFamily: "aller-std-it"
   },
-  button: {
-    marginBottom: 15,
-    marginHorizontal: 20,
-    backgroundColor: "#FF9800",
-    borderRadius: 5,
-    height: 60,
-    alignItems: "center",
-    justifyContent: "center"
+  image: {
+    width: 400,
+    height: 250,
+    resizeMode: "stretch",
+    marginBottom: 15
   }
 });
