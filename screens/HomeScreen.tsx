@@ -20,7 +20,9 @@ export default function HomeScreen(props: NavigationStackScreenProps) {
             />
           </View>
           <View>
-            <Aller_Std_BdIt style={styles.NadpisText}>VITAJTE !</Aller_Std_BdIt>
+            <Aller_Std_BdIt style={styles.NadpisText}>
+              VITAJTE !{" "}
+            </Aller_Std_BdIt>
           </View>
 
           <View>
@@ -45,58 +47,58 @@ export default function HomeScreen(props: NavigationStackScreenProps) {
 }
 
 HomeScreen.navigationOptions = {
-  header: null
+  header: null,
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff"
+    backgroundColor: "#fff",
   },
 
   contentContainer: {
-    paddingTop: 30
+    paddingTop: 30,
   },
   welcomeContainer: {
     alignItems: "center",
     marginTop: 20,
-    marginBottom: 20
+    marginBottom: 20,
   },
   bottomContainer: {
     alignItems: "center",
     marginTop: 10,
-    marginBottom: 20
+    marginBottom: 20,
   },
   welcomeImage: {
     width: 400,
     height: 200,
     resizeMode: "contain",
     marginTop: 3,
-    marginLeft: -10
+    marginLeft: -10,
   },
   bottomImage: {
     width: 400,
     height: 200,
     resizeMode: "contain",
     marginTop: 3,
-    marginLeft: 0
+    marginLeft: 0,
   },
   getStartedContainer: {
     alignItems: "center",
-    marginHorizontal: 50
+    marginHorizontal: 50,
   },
   getStartedText: {
     fontSize: 17,
     color: "rgba(96,100,109, 1)",
     lineHeight: 24,
-    textAlign: "center"
+    textAlign: "center",
   },
   NadpisText: {
     fontSize: 22,
     color: "rgba(96,100,109, 1)",
     lineHeight: 24,
     paddingBottom: 3,
-    textAlign: "center"
+    textAlign: "center",
   },
   tabBarInfoContainer: {
     position: "absolute",
@@ -108,20 +110,20 @@ const styles = StyleSheet.create({
         shadowColor: "black",
         shadowOffset: { width: 0, height: -3 },
         shadowOpacity: 0.1,
-        shadowRadius: 3
+        shadowRadius: 3,
       },
       android: {
         backgroundColor: "black",
-        elevation: 20
-      }
+        elevation: 20,
+      },
     }),
     alignItems: "center",
     backgroundColor: "#fbfbfb",
-    paddingVertical: 20
+    paddingVertical: 20,
   },
   tabBarInfoText: {
     fontSize: 17,
-    color: "rgba(96,100,109, 1)",
-    textAlign: "center"
-  }
+    color: "#E5280F",
+    textAlign: "center",
+  },
 });

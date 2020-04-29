@@ -1,13 +1,5 @@
 import React, { Component } from "react";
-import {
-  Image,
-  ScrollView,
-  StyleSheet,
-  View,
-  Text,
-  Button
-} from "react-native";
-
+import { ScrollView, StyleSheet, View } from "react-native";
 import { NavigationStackScreenProps } from "react-navigation-stack";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { db } from "../config";
@@ -20,27 +12,25 @@ let itemsRef = db.ref("/Exponaty");
 export default class ExponatDetail extends Component<
   NavigationStackScreenProps
 > {
+  static navigationOptions: {
+    title: string;
+  };
+
   state = {
-    items: []
+    items: [],
   };
 
   componentDidMount() {
-    itemsRef.on("value", snapshot => {
+    itemsRef.on("value", (snapshot) => {
       let data: Exponaty = snapshot.val();
       let items = [];
       for (const k in data) {
-        if (
-          data[k]["oblast"].toLowerCase() ==
-          this.props.navigation.getParam("oblast")
-        ) {
-          items.push({ ...data[k], id: k });
-        }
-        console.log(items);
+        items.push({ ...data[k], id: k });
+        //console.log(data[k]["oblast"]);
         //console.log(this.props.navigation.getParam("oblast"));
       }
       this.setState({ items });
     });
-    //console.log(itemsRef);
   }
   render() {
     return (
@@ -50,9 +40,9 @@ export default class ExponatDetail extends Component<
             <TouchableOpacity
               style={styles.button}
               onPress={() =>
-                this.props.navigation.navigate("ExponatDetail", {
+                this.props.navigation.navigate("VyberPoschodia", {
                   nazov: i.nazov,
-                  id: i.id
+                  id: i.id,
                 })
               }
             >
@@ -65,33 +55,25 @@ export default class ExponatDetail extends Component<
   }
 }
 
-/*ExponatDetail.navigationOptions = {
-  title: "Nazov exponatu"
-};*/
-
-/*<Text style={styles.vysokaPecText}>
-              {this.props.navigation.getParam("popis")}
-            </Text>*/
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 20,
-    backgroundColor: "#fff"
+    backgroundColor: "#fff",
   },
   text: {
-    fontSize: 20,
+    fontSize: 24,
     letterSpacing: 2,
     textAlign: "center",
-    color: "#333333"
+    color: "#333333",
   },
   button: {
     marginBottom: 15,
     marginHorizontal: 20,
-    backgroundColor: "#FF9800",
+    backgroundColor: "#2196F3",
     borderRadius: 5,
     height: 60,
     alignItems: "center",
-    justifyContent: "center"
-  }
+    justifyContent: "center",
+  },
 });

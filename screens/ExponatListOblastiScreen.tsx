@@ -1,5 +1,13 @@
 import React, { Component } from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  View,
+  Text,
+  Button,
+} from "react-native";
+
 import { NavigationStackScreenProps } from "react-navigation-stack";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { db } from "../config";
@@ -12,25 +20,27 @@ let itemsRef = db.ref("/Exponaty");
 export default class ExponatDetail extends Component<
   NavigationStackScreenProps
 > {
-  static navigationOptions: {
-    title: string;
-  };
-
   state = {
-    items: []
+    items: [],
   };
 
   componentDidMount() {
-    itemsRef.on("value", snapshot => {
+    itemsRef.on("value", (snapshot) => {
       let data: Exponaty = snapshot.val();
       let items = [];
       for (const k in data) {
-        items.push({ ...data[k], id: k });
-        //console.log(data[k]["oblast"]);
+        if (
+          data[k]["oblast"].toLowerCase() ==
+          this.props.navigation.getParam("oblast")
+        ) {
+          items.push({ ...data[k], id: k });
+        }
+        //console.log(items);
         //console.log(this.props.navigation.getParam("oblast"));
       }
       this.setState({ items });
     });
+    //console.log(itemsRef);
   }
   render() {
     return (
@@ -42,7 +52,7 @@ export default class ExponatDetail extends Component<
               onPress={() =>
                 this.props.navigation.navigate("ExponatDetail", {
                   nazov: i.nazov,
-                  id: i.id
+                  id: i.id,
                 })
               }
             >
@@ -59,21 +69,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 20,
-    backgroundColor: "#fff"
+    backgroundColor: "#fff",
   },
   text: {
-    fontSize: 24,
+    fontSize: 20,
     letterSpacing: 2,
     textAlign: "center",
-    color: "#333333"
+    color: "#333333",
   },
   button: {
     marginBottom: 15,
     marginHorizontal: 20,
-    backgroundColor: "#2196F3",
+    backgroundColor: "#FF9800",
     borderRadius: 5,
     height: 60,
     alignItems: "center",
-    justifyContent: "center"
-  }
+    justifyContent: "center",
+  },
 });

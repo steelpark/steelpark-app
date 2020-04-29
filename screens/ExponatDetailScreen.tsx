@@ -1,12 +1,18 @@
 import React, { Component } from "react";
-import { Image, ScrollView, StyleSheet, View, Text } from "react-native";
-//import Markdown from "react-native-markdown-package";
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  View,
+  Dimensions,
+  Text,
+} from "react-native";
 import HTMLView from "react-native-htmlview";
 import { NavigationStackScreenProps } from "react-navigation-stack";
 import { db, storage } from "../config";
-import { Aller_Std_It, Aller_Std_BdIt } from "../components/StyledText";
 import { Exponat } from "../interface";
 
+var screenWidth = Dimensions.get("window").width;
 type Exponaty = { [key: string]: Exponat };
 
 export default class ExponatDetail extends Component<
@@ -19,19 +25,19 @@ export default class ExponatDetail extends Component<
   }
   componentDidMount() {
     let itemsRef = db.ref(`/Exponaty/${this.props.navigation.getParam("id")}`);
-    itemsRef.on("value", snapshot => {
+    itemsRef.on("value", (snapshot) => {
       let data: Exponat = snapshot.val();
-      console.log(data);
-      console.log("ID", this.props.navigation.getParam("id"));
-      console.log("obrazok", data.obrazok);
+      //console.log(data);
+      //console.log("ID", this.props.navigation.getParam("id"));
+      //console.log("obrazok", data.obrazok);
       const imgRef = storage.refFromURL(data.obrazok);
       imgRef
         .getDownloadURL()
-        .then(url => {
+        .then((url) => {
           console.log(url);
           this.setState({ item: data, imageUrl: url });
         })
-        .catch(e => {
+        .catch((e) => {
           this.setState({ item: data });
         });
     });
@@ -45,14 +51,15 @@ export default class ExponatDetail extends Component<
             {this.state.imageUrl && (
               <Image
                 source={{ uri: this.state.imageUrl }}
-                style={{ width: 400, height: 250, resizeMode: "stretch" }}
+                style={{
+                  width: screenWidth,
+                  height: screenWidth,
+                  marginBottom: 20,
+                }}
               />
             )}
-            <HTMLView value={this.state.item.popis} stylesheet={styles.popis} />
-            <HTMLView
-              value={this.state.item.ovladanie}
-              stylesheet={styles.ovladanie}
-            />
+            <HTMLView value={this.state.item.popis} stylesheet={styles} />
+            <HTMLView value={this.state.item.ovladanie} stylesheet={styles} />
           </View>
         )}
       </ScrollView>
@@ -62,34 +69,18 @@ export default class ExponatDetail extends Component<
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 2,
     paddingTop: 0,
-    backgroundColor: "#fff"
+    backgroundColor: "#fff",
   },
-  popis: {
-    fontSize: 50,
-    letterSpacing: 2,
+  p: {
+    fontSize: 20,
+    letterSpacing: 0,
     textAlign: "justify",
     color: "#333333",
-    //backgroundColor: "red",
-    paddingBottom: 15,
-    fontFamily: "aller-std-it"
-  },
-  ovladanie: {
-    fontSize: 25,
-    letterSpacing: 2,
-    textAlign: "center",
-    color: "#333333",
-    //backgroundColor: "green",
-    paddingBottom: 10
-  },
-  button: {
+    marginRight: 20,
+    marginLeft: 20,
     marginBottom: 15,
-    marginHorizontal: 20,
-    backgroundColor: "#FF9800",
-    borderRadius: 5,
-    height: 60,
-    alignItems: "center",
-    justifyContent: "center"
-  }
+    fontFamily: "aller-std-it",
+  },
 });

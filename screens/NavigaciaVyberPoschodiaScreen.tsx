@@ -25,9 +25,9 @@ export default class LinksScreen extends Component<NavigationStackScreenProps> {
       let items = [];
       for (const k in data) {
         items.push({ ...data[k], id: k });
-        //console.log(data[k]["oblast"]);
+        //console.log(data[k]["poschodie"]);
       }
-      items = getUnique(items, "oblast");
+      items = getUnique(items, "poschodie");
       this.setState({ items });
       //console.log(items);
     });
@@ -52,12 +52,13 @@ export default class LinksScreen extends Component<NavigationStackScreenProps> {
             <TouchableOpacity
               style={styles.button}
               onPress={() =>
-                this.props.navigation.navigate("ExponatListOblasti", {
-                  oblast: i.oblast,
+                this.props.navigation.navigate("Cesta", {
+                  poschodie: i.poschodie,
+                  id: i.id,
                 })
               }
             >
-              <Aller_Std_BdIt style={styles.text}>{i.oblast}</Aller_Std_BdIt>
+              <Aller_Std_BdIt style={styles.text}>{i.poschodie}</Aller_Std_BdIt>
             </TouchableOpacity>
           </View>
         ))}

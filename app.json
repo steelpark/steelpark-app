@@ -4,8 +4,8 @@
     "slug": "steelpark-app-expo",
     "privacy": "public",
     "sdkVersion": "35.0.0",
-    "platforms": ["ios", "android", "web"],
-    "version": "1.0.0",
+    "platforms": ["android"],
+    "version": "1.0.5",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -17,8 +17,9 @@
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": ["**/*"],
-    "ios": {
-      "supportsTablet": true
+    "android": {
+      "package": "com.yourcompany.steelpark",
+      "versionCode": 1
     }
   }
 }
