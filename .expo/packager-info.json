@@ -1,9 +1,9 @@
 {
-  "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 13476,
-  "expoServerNgrokUrl": "https://72-2r3.dejvo96.steelpark-app.exp.direct",
-  "packagerNgrokUrl": "https://packager.72-2r3.dejvo96.steelpark-app.exp.direct",
-  "ngrokPid": 8136
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
+  "webpackServerPort": null
 }

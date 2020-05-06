@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { Image, ScrollView, StyleSheet, View, Text } from "react-native";
+import { Image, ScrollView, StyleSheet, View, Dimensions } from "react-native";
 import HTMLView from "react-native-htmlview";
 import { NavigationStackScreenProps } from "react-navigation-stack";
 import { db, storage } from "../config";
-import { Aller_Std_It, Aller_Std_BdIt } from "../components/StyledText";
 import { Exponat } from "../interface";
 
+var screenWidth = Dimensions.get("window").width;
 type Exponaty = { [key: string]: Exponat };
 
 export default class ExponatDetail extends Component<
@@ -18,19 +18,15 @@ export default class ExponatDetail extends Component<
   }
   componentDidMount() {
     let itemsRef = db.ref(`/Exponaty/${this.props.navigation.getParam("id")}`);
-    itemsRef.on("value", snapshot => {
+    itemsRef.on("value", (snapshot) => {
       let data: Exponat = snapshot.val();
-      //console.log(data);
-      //console.log("ID", this.props.navigation.getParam("id"));
-      //console.log("obrazok", data.obrazok);
       const imgRef = storage.refFromURL(data.obrazok);
       imgRef
         .getDownloadURL()
-        .then(url => {
-          console.log(url);
+        .then((url) => {
           this.setState({ item: data, imageUrl: url });
         })
-        .catch(e => {
+        .catch((e) => {
           this.setState({ item: data });
         });
     });
@@ -44,10 +40,15 @@ export default class ExponatDetail extends Component<
             {this.state.imageUrl && (
               <Image
                 source={{ uri: this.state.imageUrl }}
-                style={styles.image}
+                style={{
+                  width: screenWidth,
+                  height: screenWidth,
+                  marginBottom: 20,
+                }}
               />
             )}
             <HTMLView value={this.state.item.popis} stylesheet={styles} />
+            <HTMLView value={this.state.item.ovladanie} stylesheet={styles} />
           </View>
         )}
       </ScrollView>
@@ -57,32 +58,18 @@ export default class ExponatDetail extends Component<
 
 const styles = StyleSheet.create({
   container: {
-    flex: 2,
-    paddingTop: 0,
-    backgroundColor: "#fff"
+    flex: 1,
+    backgroundColor: "#FFFFFF",
+    paddingBottom: 50,
   },
   p: {
     fontSize: 20,
-    letterSpacing: 1,
+    letterSpacing: 0,
     textAlign: "justify",
     color: "#333333",
-    marginRight: 15,
-    marginLeft: 15,
-    fontFamily: "aller-std-it"
+    marginRight: 20,
+    marginLeft: 20,
+    marginBottom: 15,
+    fontFamily: "aller-std-it",
   },
-  p1: {
-    fontSize: 20,
-    letterSpacing: 1,
-    textAlign: "justify",
-    color: "#333333",
-    marginRight: 15,
-    marginLeft: 15,
-    fontFamily: "aller-std-it"
-  },
-  image: {
-    width: 400,
-    height: 250,
-    resizeMode: "stretch",
-    marginBottom: 15
-  }
 });

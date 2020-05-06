@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { ScrollView, StyleSheet, View, Button, Text } from "react-native";
+import { ScrollView, StyleSheet, View, Text } from "react-native";
 import { NavigationStackScreenProps } from "react-navigation-stack";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { db } from "../config";
 import { Aller_Std_BdIt } from "../components/StyledText";
 import { Exponat } from "../interface";
+
 type Exponaty = { [key: string]: Exponat };
 let itemsRef = db.ref("/Exponaty");
 
@@ -35,19 +36,21 @@ const sortBy = (prop: keyof Exponat) => (a: Exponat, b: Exponat) => {
 export default class ExponatDetail extends Component<
   NavigationStackScreenProps
 > {
-  static navigationOptions: {
-    title: string;
-  };
   state: { items: Exponat[]; sortBy: keyof Exponat } = {
     items: [],
     sortBy: "oblast",
   };
+
   componentDidMount() {
     itemsRef.on("value", (snapshot) => {
       let data: Exponaty = snapshot.val();
       let items: Exponat[] = [];
       for (const k in data) {
-        items.push({ ...data[k], id: k });
+        if (
+          data[k]["poschodie"] == this.props.navigation.getParam("poschodie")
+        ) {
+          items.push({ ...data[k], id: k });
+        }
       }
       items.sort(sortBy("oblast"));
       this.setState({ items });
@@ -82,7 +85,7 @@ export default class ExponatDetail extends Component<
                   styles.buttonExponat.backgroundColor,
               }}
               onPress={() =>
-                this.props.navigation.navigate("VyberPoschodia", {
+                this.props.navigation.navigate("ExponatDetail", {
                   nazov: i.nazov,
                   id: i.id,
                 })
@@ -98,6 +101,7 @@ export default class ExponatDetail extends Component<
     );
   }
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -125,16 +129,6 @@ const styles = StyleSheet.create({
     textAlignVertical: "center",
     color: "#333333",
   },
-  buttonSort: {
-    flex: 1,
-    backgroundColor: "#F4F4F5",
-    marginBottom: 10,
-    height: 50,
-    borderWidth: 1,
-    borderStyle: "solid",
-    borderColor: "#B4B4B5",
-    borderBottomWidth: 1,
-  },
   buttonExponat: {
     marginBottom: 8,
     marginLeft: "2%",
@@ -145,5 +139,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: "96%",
+  },
+  buttonSort: {
+    flex: 1,
+    backgroundColor: "#F4F4F5",
+    marginBottom: 10,
+    height: 50,
+    borderWidth: 1,
+    borderStyle: "solid",
+    borderColor: "#B4B4B5",
+    borderBottomWidth: 1,
   },
 });

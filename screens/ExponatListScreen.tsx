@@ -5,7 +5,7 @@ import {
   StyleSheet,
   View,
   Text,
-  Button
+  Button,
 } from "react-native";
 
 import { NavigationStackScreenProps } from "react-navigation-stack";
@@ -21,11 +21,11 @@ export default class ExponatDetail extends Component<
   NavigationStackScreenProps
 > {
   state = {
-    items: []
+    items: [],
   };
 
   componentDidMount() {
-    itemsRef.on("value", snapshot => {
+    itemsRef.on("value", (snapshot) => {
       let data: Exponaty = snapshot.val();
       let items = [];
       for (const k in data) {
@@ -52,7 +52,7 @@ export default class ExponatDetail extends Component<
               onPress={() =>
                 this.props.navigation.navigate("ExponatDetail", {
                   nazov: i.nazov,
-                  id: i.id
+                  id: i.id,
                 })
               }
             >
@@ -68,14 +68,14 @@ export default class ExponatDetail extends Component<
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 20,
-    backgroundColor: "#fff"
+    backgroundColor: "#FFFFFF",
+    paddingBottom: 50,
   },
   text: {
     fontSize: 20,
     letterSpacing: 2,
     textAlign: "center",
-    color: "#333333"
+    color: "#333333",
   },
   button: {
     marginBottom: 15,
@@ -84,6 +84,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     height: 60,
     alignItems: "center",
-    justifyContent: "center"
-  }
+    justifyContent: "center",
+  },
 });

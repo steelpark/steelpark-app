@@ -5,35 +5,30 @@ import { createBottomTabNavigator } from "react-navigation-tabs";
 import TabBarIcon from "../components/TabBarIcon";
 import HomeScreen from "../screens/HomeScreen";
 import OblastiScreen from "../screens/OblastiScreen";
-import ZoznamExponatovNavBarScreen from "../screens/ZoznamExpoNavBarScreen";
-import ExponatListScreen from "../screens/ExponatListScreen";
+import PoschodieScreen from "../screens/PoschodieScreen";
+import ExponatListOblastiScreen from "../screens/ExponatListOblastiScreen";
+import ExponatListPoschodieScreen from "../screens/ExponatListPoschodieScreen";
 import ExponatDetailScreen from "../screens/ExponatDetailScreen";
 import NavigationScreen from "../screens/NavigationScreen";
+import NavigaciaVyberPoschodiaScreen from "../screens/NavigaciaVyberPoschodiaScreen";
+import NavigaciaCestaScreen from "../screens/NavigaciaCestaScreen";
 
 const config = Platform.select({
-  default: {}
+  default: {},
 });
 
 const HomeStack = createStackNavigator(
   {
-    Home: HomeScreen
+    Home: HomeScreen,
   },
   config
 );
 
 HomeStack.navigationOptions = {
   tabBarLabel: "Domov",
-
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === "ios"
-          ? `ios-home${focused ? "" : "-outline"}`
-          : "md-home"
-      }
-    />
-  )
+    <TabBarIcon focused={focused} name={"md-home"} />
+  ),
 };
 
 const NavigationStack = createStackNavigator(
@@ -41,25 +36,43 @@ const NavigationStack = createStackNavigator(
     Navigation: {
       screen: NavigationScreen,
       navigationOptions: {
-        headerTintColor: "#BC6606",
-        title: "Navigacia"
-      }
-    }
+        headerTintColor: "#288FE1",
+        title: "Vyberte si exponát",
+      },
+    },
+    VyberPoschodia: {
+      screen: NavigaciaVyberPoschodiaScreen,
+      navigationOptions: {
+        headerStyle: {
+          backgroundColor: "#FFFFFF",
+        },
+        headerTitleContainerStyle: {
+          backgroundColor: "#FFF",
+        },
+        headerTintColor: "#288FE1",
+        title: "Na ktorom poschodí sa nachádzate ?",
+      },
+    },
+    Cesta: {
+      screen: NavigaciaCestaScreen,
+      navigationOptions: {
+        headerStyle: {
+          backgroundColor: "#FFFFFF",
+        },
+        headerTitleContainerStyle: {
+          backgroundColor: "#FFF",
+        },
+        headerTintColor: "#288FE1",
+        title: "Cesta k exponátu",
+      },
+    },
   },
   config
 );
 
 NavigationStack.navigationOptions = {
-  tabBarLabel: "Navigacia",
-
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === "ios" ? `ios-map${focused ? "" : "-outline"}` : "md-map"
-      }
-    />
-  )
+  tabBarLabel: "Navigácia",
+  tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={"md-map"} />,
 };
 
 NavigationStack.path = "";
@@ -70,35 +83,35 @@ const OblastiStack = createStackNavigator(
       screen: OblastiScreen,
       navigationOptions: {
         headerStyle: {
-          backgroundColor: "#FFFFFF"
+          backgroundColor: "#FFFFFF",
         },
         headerTitleContainerStyle: {
-          backgroundColor: "#FFF"
+          backgroundColor: "#FFF",
         },
-        headerTintColor: "#BC6606",
-        title: "Oblasti"
-      }
+        headerTintColor: "#288FE1",
+        title: "Oblasti",
+      },
     },
-    ExponatList: {
-      screen: ExponatListScreen,
+    ExponatListOblasti: {
+      screen: ExponatListOblastiScreen,
       navigationOptions: {
         headerStyle: {
-          backgroundColor: "#FFFFFF"
+          backgroundColor: "#FFFFFF",
         },
         headerTitleContainerStyle: {
-          backgroundColor: "#FFF"
+          backgroundColor: "#FFF",
         },
-        headerTintColor: "#BC6606",
-        title: "Zoznam exponatov"
-      }
+        headerTintColor: "#288FE1",
+        title: "Zoznam exponátov",
+      },
     },
     ExponatDetail: {
       screen: ExponatDetailScreen,
       navigationOptions: ({ navigation }) => ({
         title: `${navigation.getParam("nazov")}`,
-        headerTintColor: "#BC6606"
-      })
-    }
+        headerTintColor: "#288FE1",
+      }),
+    },
   },
   config
 );
@@ -106,58 +119,65 @@ const OblastiStack = createStackNavigator(
 OblastiStack.navigationOptions = {
   tabBarLabel: "Oblasti",
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === "ios" ? "ios-link" : "md-link"}
-    />
-  )
+    <TabBarIcon focused={focused} name={"md-filing"} />
+  ),
 };
 
 OblastiStack.path = "";
 
-const ZoznamExpoNavBarStack = createStackNavigator(
+const PoschodieStack = createStackNavigator(
   {
-    ZoznamExponatovNavBar: {
-      screen: ZoznamExponatovNavBarScreen,
+    PoschodieScreen: {
+      screen: PoschodieScreen,
       navigationOptions: {
         headerStyle: {
-          backgroundColor: "#FFFFFF"
+          backgroundColor: "#FFFFFF",
         },
         headerTitleContainerStyle: {
-          backgroundColor: "#FFF"
+          backgroundColor: "#FFF",
         },
-        headerTintColor: "#BC6606",
-        title: "Zoznam exponatov"
-      }
+        headerTintColor: "#288FE1",
+        title: "Poschodie",
+      },
+    },
+    ExponatListPoschodie: {
+      screen: ExponatListPoschodieScreen,
+      navigationOptions: {
+        headerStyle: {
+          backgroundColor: "#FFFFFF",
+        },
+        headerTitleContainerStyle: {
+          backgroundColor: "#FFF",
+        },
+        headerTintColor: "#288FE1",
+        title: "Zoznam exponátov",
+      },
     },
     ExponatDetail: {
       screen: ExponatDetailScreen,
       navigationOptions: ({ navigation }) => ({
         title: `${navigation.getParam("nazov")}`,
-        headerTintColor: "#BC6606"
-      })
-    }
+        headerTintColor: "#288FE1",
+      }),
+    },
   },
   config
 );
 
-ZoznamExpoNavBarStack.navigationOptions = {
-  tabBarLabel: "Zoznam exponatov",
+PoschodieStack.navigationOptions = {
+  tabBarLabel: "Poschodie",
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === "ios" ? "ios-card" : "md-card"}
-    />
-  )
+    <TabBarIcon focused={focused} name={"md-menu"} />
+  ),
 };
 
-ZoznamExpoNavBarStack.path = "";
+PoschodieStack.path = "";
 
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
   NavigationStack,
   OblastiStack,
-  ZoznamExpoNavBarStack
+  PoschodieStack,
 });
 
 export default tabNavigator;

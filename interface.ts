@@ -8,3 +8,11 @@ export interface Exponat {
   obrazok: string;
 }
 type Exponaty = { [key: string]: Exponat };
+
+export interface Cesta {
+  id: string;
+  druhe: string;
+  prizemie: string;
+  prve: string;
+}
+type Cesty = { [key: string]: Cesta };
