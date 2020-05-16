@@ -58,6 +58,7 @@ export default class LinksScreen extends Component<NavigationStackScreenProps> {
                 this.props.navigation.navigate("Cesta", {
                   poschodie: i.poschodie,
                   id: this.props.navigation.getParam("id"),
+                  nazov: this.props.navigation.getParam("nazov"),
                 })
               }
             >

@@ -1,8 +1,8 @@
 {
+  "urlRandomness": "7x-4ku",
   "hostType": "lan",
   "lanType": "ip",
   "dev": true,
   "minify": false,
-  "urlRandomness": "m9-dp5",
   "https": false
 }

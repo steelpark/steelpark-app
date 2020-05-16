@@ -12,6 +12,7 @@ import ExponatDetailScreen from "../screens/ExponatDetailScreen";
 import NavigationScreen from "../screens/NavigationScreen";
 import NavigaciaVyberPoschodiaScreen from "../screens/NavigaciaVyberPoschodiaScreen";
 import NavigaciaCestaScreen from "../screens/NavigaciaCestaScreen";
+import InformacieScreen from "../screens/InformacieScreen";
 
 const config = Platform.select({
   default: {},
@@ -19,7 +20,19 @@ const config = Platform.select({
 
 const HomeStack = createStackNavigator(
   {
-    Home: HomeScreen,
+    Home: {
+      screen: HomeScreen,
+      navigationOptions: {
+        header: null,
+      },
+    },
+    Informacie: {
+      screen: InformacieScreen,
+      navigationOptions: {
+        headerTintColor: "#288FE1",
+        title: "Informácie",
+      },
+    },
   },
   config
 );
@@ -55,16 +68,10 @@ const NavigationStack = createStackNavigator(
     },
     Cesta: {
       screen: NavigaciaCestaScreen,
-      navigationOptions: {
-        headerStyle: {
-          backgroundColor: "#FFFFFF",
-        },
-        headerTitleContainerStyle: {
-          backgroundColor: "#FFF",
-        },
+      navigationOptions: ({ navigation }) => ({
+        title: "Cesta k exponátu: " + `${navigation.getParam("nazov")}`,
         headerTintColor: "#288FE1",
-        title: "Cesta k exponátu",
-      },
+      }),
     },
   },
   config

@@ -69,7 +69,8 @@ const styles = StyleSheet.create({
     color: "#333333",
     marginRight: 20,
     marginLeft: 20,
-    marginBottom: 15,
+    marginTop: 10,
+    marginBottom: 25,
     fontFamily: "aller-std-it",
   },
 });

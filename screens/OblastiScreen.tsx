@@ -53,6 +53,8 @@ export default class Oblasti extends Component<NavigationStackScreenProps> {
       items.sort(sortBy("poschodie"));
       items = getUnique(items, "oblast");
       this.setState({ items });
+
+      console.log(items);
     });
     function getUnique(arr, index) {
       const unique = arr
@@ -132,7 +134,6 @@ const styles = StyleSheet.create({
     borderStyle: "solid",
     borderColor: "#B4B4B5",
     borderBottomWidth: 1,
-    //borderBottomColor: "#555555",
   },
   textSort: {
     fontWeight: "bold",
@@ -140,7 +141,7 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
     textAlign: "center",
     textAlignVertical: "center",
-    color: "#333333",
+    color: "#288FE1",
   },
   textOblast: {
     fontSize: 20,
@@ -152,6 +153,6 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 90,
     resizeMode: "stretch",
-    alignItems: "center",
+    alignSelf: "center",
   },
 });

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ScrollView, StyleSheet, View, Button, Text } from "react-native";
+import { ScrollView, StyleSheet, View, Text } from "react-native";
 import { NavigationStackScreenProps } from "react-navigation-stack";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { db } from "../config";
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
     textAlign: "center",
     textAlignVertical: "center",
-    color: "#333333",
+    color: "#288FE1",
   },
   buttonSort: {
     flex: 1,
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#2196F3",
     borderRadius: 5,
     height: 60,
-    alignItems: "center",
+    alignSelf: "center",
     justifyContent: "center",
     width: "96%",
   },

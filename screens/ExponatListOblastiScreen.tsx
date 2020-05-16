@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
     textAlign: "center",
     textAlignVertical: "center",
-    color: "#333333",
+    color: "#288FE1",
   },
   buttonExponat: {
     marginBottom: 8,
