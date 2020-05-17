@@ -4,6 +4,7 @@ import { db } from "../config";
 import { NavigationStackScreenProps } from "react-navigation-stack";
 import { Aller_Std_BdIt } from "../components/StyledText";
 import { Exponat } from "../interface";
+import WarningInternetScreen from "./WarningInternetScreen";
 
 type Exponaty = { [key: string]: Exponat };
 let itemsRef = db.ref("/Exponaty/");
@@ -43,7 +44,9 @@ export default class LinksScreen extends Component<NavigationStackScreenProps> {
   }
 
   render() {
-    return (
+    return this.state.items === null ? (
+      this.props.navigation.navigate("Warning")
+    ) : (
       <ScrollView style={styles.container}>
         {this.state.items.map((i: Exponat) => (
           <View key={i.id}>

@@ -9,11 +9,11 @@ type Cesty = { [key: string]: Cesta };
 
 export default class ExponatDetail extends Component<
   NavigationStackScreenProps,
-  { item?: Cesta }
+  { item?: Cesta | string }
 > {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { item: "" };
   }
   componentDidMount() {
     let itemsRef = db.ref(

@@ -4,6 +4,7 @@ import { NavigationStackScreenProps } from "react-navigation-stack";
 import { db } from "../config";
 import HTMLView from "react-native-htmlview";
 import { Informacia } from "../interface";
+import WarningInternetScreen from "./WarningInternetScreen";
 
 type Informacie = { [key: string]: Informacia };
 let itemsRef = db.ref("/Informacie");
@@ -18,7 +19,6 @@ export default class ExponatDetail extends Component<
 
   state = {
     items: [],
-    items2: [],
   };
 
   componentDidMount() {
@@ -33,7 +33,9 @@ export default class ExponatDetail extends Component<
     });
   }
   render() {
-    return (
+    return this.state.items === null ? (
+      <WarningInternetScreen />
+    ) : (
       <ScrollView style={styles.container}>
         {this.state.items.map((i: Informacia) => (
           <View key={i.id}>
@@ -104,5 +106,11 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
     marginTop: 20,
     marginBottom: 25,
+  },
+  obrazokLogo: {
+    width: 512,
+    height: 512,
+    resizeMode: "contain",
+    marginTop: 30,
   },
 });

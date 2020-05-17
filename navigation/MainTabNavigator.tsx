@@ -13,6 +13,7 @@ import NavigationScreen from "../screens/NavigationScreen";
 import NavigaciaVyberPoschodiaScreen from "../screens/NavigaciaVyberPoschodiaScreen";
 import NavigaciaCestaScreen from "../screens/NavigaciaCestaScreen";
 import InformacieScreen from "../screens/InformacieScreen";
+import WarningInternetScreen from "../screens/WarningInternetScreen";
 
 const config = Platform.select({
   default: {},
@@ -32,6 +33,10 @@ const HomeStack = createStackNavigator(
         headerTintColor: "#288FE1",
         title: "Informácie",
       },
+    },
+    Warning: {
+      screen: WarningInternetScreen,
+      navigationOptions: {},
     },
   },
   config
@@ -72,6 +77,10 @@ const NavigationStack = createStackNavigator(
         title: "Cesta k exponátu: " + `${navigation.getParam("nazov")}`,
         headerTintColor: "#288FE1",
       }),
+    },
+    Warning: {
+      screen: WarningInternetScreen,
+      navigationOptions: {},
     },
   },
   config
@@ -118,6 +127,10 @@ const OblastiStack = createStackNavigator(
         title: `${navigation.getParam("nazov")}`,
         headerTintColor: "#288FE1",
       }),
+    },
+    Warning: {
+      screen: WarningInternetScreen,
+      navigationOptions: {},
     },
   },
   config
@@ -166,6 +179,10 @@ const PoschodieStack = createStackNavigator(
         title: `${navigation.getParam("nazov")}`,
         headerTintColor: "#288FE1",
       }),
+    },
+    Warning: {
+      screen: WarningInternetScreen,
+      navigationOptions: {},
     },
   },
   config
