@@ -1,4 +1,6 @@
 {
+  "name": "Steelpark",
+  "displayName": "Steelpark",
   "expo": {
     "name": "Steelpark",
     "slug": "steelpark-app-expo",
@@ -22,9 +24,7 @@
     },
     "android": {
       "package": "com.yourcompany.steelpark",
-      "versionCode": 1,
-      "name": "Steelpark",
-      "displayName": "Steelpark"
+      "versionCode": 1
     }
   }
 }
