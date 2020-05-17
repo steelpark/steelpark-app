@@ -23,8 +23,8 @@
     "android": {
       "package": "com.yourcompany.steelpark",
       "versionCode": 1
-      "name" : "Steelpark",
-      "displayName" : "Steelpark"
+      "name": "Steelpark",
+      "displayName": "Steelpark"
     }
   }
 }
