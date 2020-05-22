@@ -47,8 +47,20 @@ export default class ExponatDetail extends Component<
                 }}
               />
             )}
-            <HTMLView value={this.state.item.popis} stylesheet={styles} />
-            <HTMLView value={this.state.item.ovladanie} stylesheet={styles} />
+            <HTMLView
+              value={
+                this.state.item.popis ? this.state.item.popis : "Žiadne data"
+              }
+              stylesheet={styles}
+            />
+            <HTMLView
+              value={
+                this.state.item.ovladanie
+                  ? this.state.item.ovladanie
+                  : "Žiadne data"
+              }
+              stylesheet={styles}
+            />
           </View>
         )}
       </ScrollView>
@@ -67,9 +79,8 @@ const styles = StyleSheet.create({
     letterSpacing: 0,
     textAlign: "justify",
     color: "#333333",
-    marginRight: 20,
+    marginRight: 25,
     marginLeft: 20,
-    marginTop: 10,
     marginBottom: 25,
     fontFamily: "aller-std-it",
   },

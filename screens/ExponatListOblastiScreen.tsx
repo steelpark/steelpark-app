@@ -12,15 +12,29 @@ let itemsRef = db.ref("/Exponaty");
 const buttonColors = {
   biometria: "#F78DA7",
   chémia: "#D6A805",
-  fyzika: "#B80000",
+  fyzika: "#DB2E2E",
   geografia: "#007302",
-  geológia: "#000000",
-  hutníctvo: "#FF6A00",
-  magnetizmus: "#0929D9",
+  geológia: "#1C1C1C",
+  hutníctvo: "#FF9800",
+  magnetizmus: "#0D5FB1",
   optika: "#2196F3",
   recyklácia: "#689F38",
   robotika: "#795548",
   strojárstvo: "#607D8B",
+};
+
+const textColors = {
+  biometria: "#2F2F2F",
+  chémia: "#2F2F2F",
+  fyzika: "#2F2F2F",
+  geografia: "#2F2F2F",
+  geológia: "#C9D0D6",
+  hutníctvo: "#2F2F2F",
+  magnetizmus: "#C9D0D6",
+  optika: "#2F2F2F",
+  recyklácia: "#2F2F2F",
+  robotika: "#2F2F2F",
+  strojárstvo: "#2F2F2F",
 };
 
 const sortBy = (prop: keyof Exponat) => (a: Exponat, b: Exponat) => {
@@ -92,8 +106,13 @@ export default class ExponatDetail extends Component<
                 })
               }
             >
-              <Aller_Std_BdIt style={styles.textExponat}>
-                {i.nazov}
+              <Aller_Std_BdIt
+                style={{
+                  ...styles.textExponat,
+                  color: textColors[i.oblast] || styles.textExponat.color,
+                }}
+              >
+                {i.nazov ? i.nazov : "Žiadne data"}
               </Aller_Std_BdIt>
             </TouchableOpacity>
           </View>
@@ -117,7 +136,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   textExponat: {
-    fontSize: 20,
+    fontSize: 23,
     letterSpacing: 2,
     textAlign: "center",
     color: "#C9D0D6",
@@ -144,11 +163,12 @@ const styles = StyleSheet.create({
   buttonSort: {
     flex: 1,
     backgroundColor: "#F4F4F5",
+    marginTop: 10,
     marginBottom: 10,
     height: 50,
     borderWidth: 1,
     borderStyle: "solid",
-    borderColor: "#B4B4B5",
+    borderColor: "#FFFFFF",
     borderBottomWidth: 1,
   },
 });

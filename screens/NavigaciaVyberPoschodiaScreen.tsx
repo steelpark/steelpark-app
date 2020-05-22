@@ -63,7 +63,7 @@ export default class LinksScreen extends Component<NavigationStackScreenProps> {
               }
             >
               <Aller_Std_BdIt style={styles.textPoschodie}>
-                {i.poschodie}
+                {i.poschodie ? i.poschodie : "Žiadne data"}
               </Aller_Std_BdIt>
             </TouchableOpacity>
           </View>

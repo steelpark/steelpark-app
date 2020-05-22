@@ -13,7 +13,7 @@ export default class ExponatDetail extends Component<
 > {
   constructor(props) {
     super(props);
-    this.state = { item: "" };
+    this.state = { item: " " };
   }
   componentDidMount() {
     let itemsRef = db.ref(
@@ -24,9 +24,6 @@ export default class ExponatDetail extends Component<
     itemsRef.on("value", (snapshot) => {
       let data: Cesta = snapshot.val();
       this.setState({ item: data });
-      if (data == null) {
-        return console.log("prazdne");
-      }
     });
   }
 
@@ -34,7 +31,11 @@ export default class ExponatDetail extends Component<
     return (
       <ScrollView style={styles.container}>
         <View>
-          <HTMLView value={this.state.item} stylesheet={styles} />
+          <HTMLView
+            addLineBreaks={false}
+            value={this.state.item ? this.state.item : "Žiadne data"}
+            stylesheet={styles}
+          />
         </View>
       </ScrollView>
     );

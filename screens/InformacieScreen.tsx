@@ -1,18 +1,15 @@
 import React, { Component } from "react";
-import { ScrollView, StyleSheet, View, Image, Dimensions } from "react-native";
+import { ScrollView, StyleSheet, View, Dimensions, Image } from "react-native";
 import { NavigationStackScreenProps } from "react-navigation-stack";
 import { db } from "../config";
 import HTMLView from "react-native-htmlview";
 import { Informacia } from "../interface";
-import WarningInternetScreen from "./WarningInternetScreen";
 
 type Informacie = { [key: string]: Informacia };
 let itemsRef = db.ref("/Informacie");
 var screenWidth = Dimensions.get("window").width;
 
-export default class ExponatDetail extends Component<
-  NavigationStackScreenProps
-> {
+export default class Info extends Component<NavigationStackScreenProps> {
   static navigationOptions: {
     title: string;
   };
@@ -29,19 +26,16 @@ export default class ExponatDetail extends Component<
         items.push({ ...data[k], id: k });
       }
       this.setState({ items });
-      console.log(items);
     });
   }
   render() {
-    return this.state.items === null ? (
-      <WarningInternetScreen />
-    ) : (
+    return (
       <ScrollView style={styles.container}>
         {this.state.items.map((i: Informacia) => (
           <View key={i.id}>
             <HTMLView
               addLineBreaks={false}
-              value={i.cennikOtvHod}
+              value={i.cennikOtvHod ? i.cennikOtvHod : "Žiadne data"}
               stylesheet={styles}
             />
           </View>
@@ -65,28 +59,28 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   p: {
-    fontSize: 15,
+    fontSize: 18,
     letterSpacing: 2,
     textAlign: "left",
     color: "#333333",
     margin: -4,
     padding: -4,
-    paddingLeft: 18,
+    paddingLeft: 20,
     fontFamily: "aller-std-it",
   },
   p2: {
-    fontSize: 10,
+    fontSize: 13,
     letterSpacing: 2,
     textAlign: "left",
     color: "#333333",
     margin: -4,
     padding: -4,
-    paddingLeft: 18,
+    paddingLeft: 20,
     fontStyle: "italic",
     fontFamily: "aller-std-it",
   },
   h2: {
-    fontSize: 25,
+    fontSize: 27,
     letterSpacing: 2,
     textAlign: "center",
     color: "#333333",
@@ -94,7 +88,7 @@ const styles = StyleSheet.create({
     fontFamily: "aller-std-it",
   },
   h3: {
-    fontSize: 20,
+    fontSize: 22,
     letterSpacing: 2,
     textAlign: "center",
     color: "#333333",
@@ -103,14 +97,8 @@ const styles = StyleSheet.create({
   },
   bottomImage: {
     height: 300,
-    resizeMode: "contain",
+    resizeMode: "stretch",
     marginTop: 20,
-    marginBottom: 25,
-  },
-  obrazokLogo: {
-    width: 512,
-    height: 512,
-    resizeMode: "contain",
-    marginTop: 30,
+    marginBottom: 30,
   },
 });

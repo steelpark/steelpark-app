@@ -4,7 +4,6 @@ import { db } from "../config";
 import { NavigationStackScreenProps } from "react-navigation-stack";
 import { Aller_Std_BdIt } from "../components/StyledText";
 import { Exponat } from "../interface";
-import WarningInternetScreen from "./WarningInternetScreen";
 
 type Exponaty = { [key: string]: Exponat };
 let itemsRef = db.ref("/Exponaty/");
@@ -30,7 +29,6 @@ export default class LinksScreen extends Component<NavigationStackScreenProps> {
       items = getUnique(items, "poschodie");
       this.setState({ items });
     });
-
     function getUnique(arr, index) {
       const unique = arr
         .map((e) => e[index])
@@ -44,9 +42,7 @@ export default class LinksScreen extends Component<NavigationStackScreenProps> {
   }
 
   render() {
-    return this.state.items === null ? (
-      this.props.navigation.navigate("Warning")
-    ) : (
+    return (
       <ScrollView style={styles.container}>
         {this.state.items.map((i: Exponat) => (
           <View key={i.id}>
@@ -64,7 +60,7 @@ export default class LinksScreen extends Component<NavigationStackScreenProps> {
               }
             >
               <Aller_Std_BdIt style={styles.textPoschodie}>
-                {i.poschodie}
+                {i.poschodie ? i.poschodie : "Žiadne data"}
               </Aller_Std_BdIt>
             </TouchableOpacity>
           </View>

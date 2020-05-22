@@ -53,8 +53,6 @@ export default class Oblasti extends Component<NavigationStackScreenProps> {
       items.sort(sortBy("poschodie"));
       items = getUnique(items, "oblast");
       this.setState({ items });
-
-      console.log(items);
     });
     function getUnique(arr, index) {
       const unique = arr
@@ -100,7 +98,7 @@ export default class Oblasti extends Component<NavigationStackScreenProps> {
                 source={buttonImage[i.oblast]}
               ></ImageBackground>
               <Aller_Std_BdIt style={styles.textOblast}>
-                {i.oblast}
+                {i.oblast ? i.oblast : "Žiadne data"}
               </Aller_Std_BdIt>
             </TouchableOpacity>
           </View>
@@ -129,10 +127,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#F4F4F5",
     marginBottom: 10,
+    marginTop: 10,
     height: 50,
     borderWidth: 1,
     borderStyle: "solid",
-    borderColor: "#B4B4B5",
+    borderColor: "#FFFFFF",
     borderBottomWidth: 1,
   },
   textSort: {
@@ -144,7 +143,7 @@ const styles = StyleSheet.create({
     color: "#288FE1",
   },
   textOblast: {
-    fontSize: 20,
+    fontSize: 25,
     letterSpacing: 2,
     textAlign: "center",
     color: "#333333",

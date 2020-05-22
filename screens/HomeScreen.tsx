@@ -19,10 +19,7 @@ export default class HomeScreen extends Component<NavigationStackScreenProps> {
   };
   render() {
     return (
-      <ScrollView
-        style={styles.container}
-        contentContainerStyle={styles.contentContainer}
-      >
+      <ScrollView style={styles.container}>
         <StatusBar animated={true} hidden={true}></StatusBar>
         <View style={styles.getStartedContainer}>
           <View style={styles.welcomeContainer}>
@@ -46,6 +43,17 @@ export default class HomeScreen extends Component<NavigationStackScreenProps> {
             </Aller_Std_It>
           </View>
 
+          <View style={styles.informacieContainer}>
+            <TouchableOpacity
+              style={styles.buttonInformacie}
+              onPress={() => this.props.navigation.navigate("Informacie", {})}
+            >
+              <Aller_Std_BdIt style={styles.textInformacie}>
+                Informácie
+              </Aller_Std_BdIt>
+            </TouchableOpacity>
+          </View>
+
           <View style={styles.obrazokSpodok}>
             <Image
               source={require("../assets/homescreenbottom.png")}
@@ -54,16 +62,6 @@ export default class HomeScreen extends Component<NavigationStackScreenProps> {
                 width: screenWidth,
               }}
             />
-          </View>
-
-          <View style={styles.informacieContainer}>
-            <TouchableOpacity
-              onPress={() => this.props.navigation.navigate("Informacie", {})}
-            >
-              <Aller_Std_BdIt style={styles.textInformacie}>
-                Informácie
-              </Aller_Std_BdIt>
-            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
@@ -77,9 +75,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
   },
 
-  contentContainer: {
-    paddingTop: 30,
-  },
   welcomeContainer: {
     width: "auto",
     alignItems: "center",
@@ -87,40 +82,43 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   obrazokSpodok: {
-    alignItems: "center",
+    resizeMode: "contain",
     marginTop: 10,
     marginBottom: 20,
+    marginLeft: 25,
+    marginRight: 25,
   },
   obrazokLogo: {
     width: 450,
     height: 200,
     resizeMode: "contain",
     marginTop: 3,
-    marginLeft: -10,
+    marginLeft: 10,
+    marginRight: 10,
   },
   informacieContainer: {
     flex: 1,
-    marginTop: 10,
-    marginBottom: 10,
+    marginTop: 25,
+    marginBottom: 5,
   },
   buttonInformacie: {
-    marginBottom: 8,
     marginLeft: "2%",
     marginRight: "2%",
-    color: "#2196F3",
+    backgroundColor: "#F37933",
     borderRadius: 5,
     height: 60,
     alignSelf: "center",
+    justifyContent: "center",
     width: "96%",
   },
   textInformacie: {
     fontSize: 20,
     letterSpacing: 2,
     textAlign: "center",
-    color: "#C9D0D6",
+    color: "#000000",
   },
   bottomImage: {
-    height: 300,
+    height: 400,
     resizeMode: "contain",
   },
   getStartedContainer: {
